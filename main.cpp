@@ -64,7 +64,6 @@ long Task4(int num)
 void Task5()
 {
     std::vector<int> vec;
-    vec.push_back(2);
     int value;
     std::cout << "Введите число : ";
     std::cin >> value;
@@ -75,6 +74,7 @@ void Task5()
         {
             vec.push_back(i);
         }
+        return vec;
     };
 
     func();
