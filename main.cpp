@@ -5,6 +5,8 @@
 #include <chrono>
 #include <iomanip>
 #include <vector>
+#include <algorithm>
+
 
 
 void Task1(const std::string& str)
@@ -21,7 +23,7 @@ void Task2(auto& var1, auto& var2)
 }
 
 
-std::pair<std::string, std::string> Task3(std::string name, std::string surname)
+auto Task3(std::string name, std::string surname)
 {
     std::pair<std::string, std::string> pair;
     
@@ -63,21 +65,21 @@ long Task4(int num)
 
 void Task5()
 {
-    std::vector<int> vec;
     int value;
     std::cout << "Введите число : ";
     std::cin >> value;
+    std::vector<int> vec(value);
+
 
     auto func = [&]()
     {
-        for (int i{1}; i <= value; i++)
-        {
-            vec.push_back(i);
-        }
-        return vec;
+        static int i{0};
+        i++;
+        return i;
     };
 
-    func();
+    std::generate(vec.begin(), vec.end(),func);
+
 }
 
 
@@ -103,10 +105,10 @@ int main()
     // {
     //     string name{"John"};
     //     string surname{"Patterson"};
-    //
-    //     std::pair<std::string, std::string> pair = Task3(name, surname);
-    //
-    //     cout << pair.first << " " << pair.second;
+    
+    //     auto [x, y] = Task3(name, surname);
+    
+    //     cout << x << " " << y;
     // }
 
 
