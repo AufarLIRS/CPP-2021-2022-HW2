@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 void Log(const string& str)
@@ -20,7 +21,7 @@ auto Task_3(string surname, string name)
   return std::pair<std::string, std::string>{ surname, name };
 }
 
-int Find_fact(int x)
+constexpr int Find_fact(int x)
 {
   if (x <= 1)
   {
@@ -32,10 +33,10 @@ int Find_fact(int x)
 auto Naturals(int n)
 {
   vector<int> out_vec(n);
-  for (int i = 0; i < n; i++)
-  {
-    out_vec[i] = i + 1;
-  }
+  std::generate(out_vec.begin(), out_vec.end(), []() {
+    static int i = 1;
+    return i++;
+  });
   return out_vec;
 }
 
@@ -56,7 +57,8 @@ int main()
   auto [x1, x2] = Task_3("Lisenko", "Aleksey");
   std::cout << x1 << " " << x2 << std::endl;
 
-  std::cout << Find_fact(5) << std::endl;
+  constexpr int fact = Find_fact(5);
+  std::cout << fact << std::endl;
   int num;
   std::cout << "Введите число для нахождения фокториала: " << std::endl;
   std::cin >> num;
